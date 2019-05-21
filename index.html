@@ -21,21 +21,23 @@
     }
 </style>
 <div id='main'>
-    <div id='outputCol'><a href='#' onclick="printCol(5)">Print n Columns</a></div>
-    <div id='outputRow'><a href='#' onclick="printRow(5)">Print n Rows</a></div>
+    <div id='outputCol'><a href='#' onclick="printCol()">Print n Columns</a></div>
+    <div id='outputRow'><a href='#' onclick="printRow()">Print n Rows</a></div>
     <div id='outputRowCol'><a href='#' onclick="printRowCol(5,7)">Print n Rows and Cols</a></div>
-    <div id='outputRowColL'><a href='#' onclick="printRowColL(5)">Print n Rows and Cols L</a></div>
-    <div id='outputRowColF'><a href='#' onclick="printRowColF(5)">Print n Rows and Cols F</a></div>
-    <div id='outputRowColF2'><a href='#' onclick="printRowColF2(5)">Print n Rows and Cols F2</a></div>
-    <div id='outputRowCol7'><a href='#' onclick="printRowCol7(5)">Print n Rows and Cols 7</a></div>
-    <div id='outputRowCol4'><a href='#' onclick="printRowCol4(5)">Print n Rows and Cols 4</a></div>
-    <div id='outputTopTriangle'><a href='#' onclick="printTopTriangle(5)">print Top Triangle</a></div>
+    <div id='outputRowColL'><a href='#' onclick="printRowColL()">Print n Rows and Cols L</a></div>
+    <div id='outputRowColF'><a href='#' onclick="printRowColF()">Print n Rows and Cols F</a></div>
+    <div id='outputRowColF2'><a href='#' onclick="printRowColF2()">Print n Rows and Cols F2</a></div>
+    <div id='outputRowCol7'><a href='#' onclick="printRowCol7()">Print n Rows and Cols 7</a></div>
+    <div id='outputRowCol4'><a href='#' onclick="printRowCol4()">Print n Rows and Cols 4</a></div>
+    <div id='outputTopTriangle'><a href='#' onclick="printTopTriangle()">print Top Triangle</a></div>
     <div id='outputBottomTriangle'><a href='#' onclick="printBottomTriangle(5,0)">print Bottom Triangle</a></div>
     <div id='outputDiamond'><a href='#' onclick="printDiamond(5,-1)">print Diamond</a></div>
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 <script>
+const totalNRow = 5;
+const totalNCol = 7;
 
     const addBackgroundColor = (object) => {
         debugger;
@@ -43,7 +45,7 @@
         $(object).css("background-color", "yellow");
     }
 
-    const printCol = (n) => {
+    const printCol = (n = totalNRow) => {
         // span is inline-level
 
         for (let i = 0; i < n; i++) {
@@ -53,7 +55,7 @@
         }
     }
 
-    const printRow = (n) => {
+    const printRow = (n = totalNRow) => {
         // div is block-level
 
         for (let i = 0; i < n; i++) {
@@ -63,7 +65,7 @@
         }
     }
 
-    const printRowCol = (totalRow, totalCol) => {
+    const printRowCol = (totalRow = totalNRow, totalCol = totalNCol) => {
         // Nested loop
 
         for (let i = 0; i < totalRow; i++) {
@@ -77,7 +79,7 @@
         addBackgroundColor($('#outputRowCol'));
     }
 
-    const printRowColL = (totalRow) => {
+    const printRowColL = (totalRow = totalNRow) => {
         // Can be modified from printRowCol
         // Change the inner loop condition to outer loop counter
 
@@ -92,7 +94,7 @@
         addBackgroundColor($('#outputRowColL'));
     }
 
-    const printRowColF = (totalRow) => {
+    const printRowColF = (totalRow = totalNRow) => {
         for (let i = totalRow; i > 0; i--) {
             for (let x = 0; x < i; x++) {
                 let col = $('<span></span>').text('X');
@@ -104,9 +106,9 @@
         addBackgroundColor($('#outputRowColF'));
     }
 
-    const printRowColF2 = (totalRow) => {
+    const printRowColF2 = (totalRow = totalNRow) => {
         for (let i = 0; i < totalRow; i++) {
-            for (let x = totalRow; x > i; x--) {
+            for (let x = 0; x < totalRow - i; x++) {
                 let col = $('<span></span>').text('X');
                 $('#outputRowColF2').append(col);
             }
@@ -116,7 +118,7 @@
         addBackgroundColor($('#outputRowColF2'));
     }
 
-    const printRowCol7 = (totalRow) => {
+    const printRowCol7 = (totalRow = totalNRow) => {
         for (let i = 0; i <= totalRow; i++) {
             // Empty space will be trim in html css
             for (let x = 0; x < i; x++) {
@@ -133,13 +135,14 @@
         addBackgroundColor($('#outputRowCol7'));
     }
 
-    const printRowCol4 = (totalRow) => {
+    const printRowCol4 = (totalRow = totalNRow) => {
         // printRowCol4 is a combination of printRowColF2 (space) and printRowColL (star)
+        // But starting number of loop element is 1 instead of 0.
 
-        let startElement = 1;
-        for (let i = startElement; i <= totalRow; i++) {
+        let startElement = 0;
+        for (let i = startElement; i < totalRow; i++) {
             // Empty space will be trim in html css
-            for (let x = startElement; x <= totalRow - i; x++) {
+            for (let x = startElement; x < totalRow - i; x++) {
                 let col = $('<span class="blank"></span>').text('X');
                 $('#outputRowCol4').append(col);
             }
@@ -153,7 +156,7 @@
         addBackgroundColor($('#outputRowCol4'));
     }
 
-    const printTopTriangle = (totalRow) => {
+    const printTopTriangle = (totalRow = totalNRow) => {
         // Top Triangle can be modified from printRowCol4
         // Change the second inner loop condition to (n*2)-1 formulat
 
@@ -175,7 +178,7 @@
         addBackgroundColor($('#outputTopTriangle'));
     }
 
-    const printBottomTriangle = (totalRow, z = 0) => {
+    const printBottomTriangle = (totalRow = totalNRow, z = 0) => {
         // Bottom Triangle is Top Triangle's inversion.
         // Modify to desc.
 
@@ -199,12 +202,12 @@
         addBackgroundColor($('#outputBottomTriangle'));
     }
 
-    const printDiamond = (totalRow) => {
+    const printDiamond = (totalRow = totalNRow) => {
         // Diamond is a combination of Top and Bottom Triangle.
         // But Bottom Triangle starting loop counter need to minus 1.
-        
-        printTopTriangle(totalRow);
-        printBottomTriangle(totalRow, -1);
+
+        printTopTriangle(totalRow = totalNRow);
+        printBottomTriangle(totalRow = totalNRow, -1);
     }
 
     //printRowCol7(5);
