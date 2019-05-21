@@ -1,0 +1,195 @@
+<style>
+    div#main {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    div#main>div {
+        border: 1px solid silver;
+        padding: 10px;
+        font-size: 2em;
+        margin:10px;
+    }
+
+    a::after {
+        content: "\A";
+        white-space: pre;
+    }
+</style>
+<div id='main'>
+    <div id='outputCol'><a href='#' onclick="printCol(5)">Print n Columns</a></div>
+    <div id='outputRow'><a href='#' onclick="printRow(5)">Print n Rows</a></div>
+    <div id='outputRowCol'><a href='#' onclick="printRowCol(5,7)">Print n Rows and Cols</a></div>
+    <div id='outputRowColL'><a href='#' onclick="printRowColL(5)">Print n Rows and Cols L</a></div>
+    <div id='outputRowColF'><a href='#' onclick="printRowColF(5)">Print n Rows and Cols F</a></div>
+    <div id='outputRowColF2'><a href='#' onclick="printRowColF2(5)">Print n Rows and Cols F2</a></div>
+    <div id='outputRowCol7'><a href='#' onclick="printRowCol7(5)">Print n Rows and Cols 7</a></div>
+    <div id='outputRowCol4'><a href='#' onclick="printRowCol4(5)">Print n Rows and Cols 4</a></div>
+    <div id='outputTopTriangle'><a href='#' onclick="printTopTriangle(5)">print Top Triangle</a></div>
+    <div id='outputBottomTriangle'><a href='#' onclick="printBottomTriangle(5,0)">print Bottom Triangle</a></div>
+    <div id='outputDiamond'><a href='#' onclick="printDiamond(5,-1)">print Diamond</a></div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<script>
+
+    const addBackgroundColor = (object) => {
+        debugger;
+        $('*').css('background', 'transparent');
+        $(object).css("background-color", "yellow");
+    }
+
+    const printCol = (n) => {
+        for (var i = 0; i < n; i++) {
+            var col = $('<span></span>').text('X');
+            $('#outputCol').append(col);
+            addBackgroundColor($('#outputCol'));
+        }
+    }
+
+    const printRow = (n) => {
+        for (var i = 0; i < n; i++) {
+            var col = $('<div></div>').text('X');
+            $('#outputRow').append(col);
+            addBackgroundColor($('#outputRow'));            
+        }
+    }
+
+    const printRowCol = (totalRow, totalCol) => {
+        for (var i = 0; i < totalRow; i++) {
+            for (var x = 0; x < totalCol; x++) {
+                var col = $('<span></span>').text('X');
+                $('#outputRowCol').append(col);
+            }
+            debugger
+            $('#outputRowCol').append('<br>');
+        }
+        addBackgroundColor($('#outputRowCol'));            
+    }
+
+    const printRowColL = (totalRow) => {
+        for (var i = 0; i <= totalRow; i++) {
+            for (var x = 0; x < i; x++) {
+
+                var col = $('<span></span>').text('X');
+                $('#outputRowColL').append(col);
+            }
+            debugger
+            $('#outputRowColL').append('<br>');
+        }
+        addBackgroundColor($('#outputRowColL'));
+    }
+
+    const printRowColF = (totalRow) => {
+        for (var i = totalRow; i > 0; i--) {
+            for (var x = 0; x < i; x++) {
+                var col = $('<span></span>').text('X');
+                $('#outputRowColF').append(col);
+            }
+            debugger
+            $('#outputRowColF').append('<br>');
+        }
+        addBackgroundColor($('#outputRowColF'));
+    }
+
+    const printRowColF2 = (totalRow) => {
+        for (var i = 0; i < totalRow; i++) {
+            for (var x = totalRow; x > i; x--) {
+                var col = $('<span></span>').text('X');
+                $('#outputRowColF2').append(col);
+            }
+            debugger
+            $('#outputRowColF2').append('<br>');
+        }
+        addBackgroundColor($('#outputRowColF2'));
+    }
+
+    const printRowCol7 = (totalRow) => {
+        for (var i = 0; i < totalRow; i++) {
+            // Empty space will be trim in html css
+            for (var x = 0; x <= i; x++) {
+                var col = $('<span style="visibility:hidden"></span>').text('X');
+                $('#outputRowCol7').append(col);
+            }
+
+            for (var x = totalRow; x > i; x--) {
+                var col = $('<span></span>').text('X');
+                $('#outputRowCol7').append(col);
+            }
+            debugger
+            $('#outputRowCol7').append('<br>');
+        }
+        addBackgroundColor($('#outputRowCol7'));
+    }
+
+    const printRowCol4 = (totalRow) => {
+        debugger
+        var startElement = 1;
+        for (var i = startElement; i <= totalRow; i++) {
+            // Empty space will be trim in html css
+            for (var x = startElement; x <= totalRow - i; x++) {
+                var col = $('<span style="visibility:hidden"></span>').text('X');
+                $('#outputRowCol4').append(col);
+            }
+
+            for (var x = startElement; x <= i; x++) {
+                var col = $('<span></span>').text('X');
+                $('#outputRowCol4').append(col);
+            }
+            debugger
+            $('#outputRowCol4').append('<br>');
+        }
+        addBackgroundColor($('#outputRowCol4'));
+    }
+
+    const printTopTriangle = (totalRow) => {
+        debugger
+        var startElement = 1;
+        for (var i = startElement; i <= totalRow; i++) {
+            // Empty space will be trim in html css
+            for (var x = startElement; x <= totalRow - i; x++) {
+                var col = $('<span style="visibility:hidden"></span>').text('X');
+                $('#outputTopTriangle').append(col);
+            }
+
+            for (var x = startElement; x <= i * 2 - 1; x++) {
+                var col = $('<span></span>').text('X');
+                $('#outputTopTriangle').append(col);
+            }
+            debugger
+            $('#outputTopTriangle').append('<br>');
+        }
+        addBackgroundColor($('#outputTopTriangle'));
+    }
+
+    const printBottomTriangle = (totalRow, z = 0) => {
+        debugger
+        var startElement = 1;
+        for (var i = totalRow + z; i >= startElement; i--) {
+            // Empty space will be trim in html css
+            for (var x = totalRow - i; x > 0; x--) {
+                var col = $('<span style="visibility:hidden"></span>').text('X');
+                debugger
+                $('#outputBottomTriangle').append(col);
+            }
+
+            for (var x = startElement; x <= i * 2 - 1; x++) {
+                var col = $('<span></span>').text('X');
+                $('#outputBottomTriangle').append(col);
+            }
+
+            debugger
+            $('#outputBottomTriangle').append('<br>');
+        }
+        addBackgroundColor($('#outputBottomTriangle'));
+    }
+
+    const printDiamond = (totalRow) => {
+        debugger
+        printTopTriangle(totalRow);
+        printBottomTriangle(totalRow, -1);
+    }
+
+    //printCol(5);
+
+</script>
